@@ -23,7 +23,7 @@ public class ImdbApiRequest {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+	public static void main(String[] args) {
 		try {
 			ApiRequest();
 		} catch (URISyntaxException | IOException | InterruptedException ex) {
@@ -32,7 +32,7 @@ public class ImdbApiRequest {
 	}
 
 	/**
-	 * Realiza uma requisição à Api do IMDB e exibe no terminal os 250 filmes mais
+	 * Realiza uma requisição à API do IMDB e exibe no terminal os 250 filmes mais
 	 * bem avaliados.
 	 * 
 	 * @throws URISyntaxException
