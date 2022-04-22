@@ -44,17 +44,21 @@ public class ImdbApiRequest {
 	 * @throws NullPointerException
 	 */
 	private static void showResult(ImdbApiResponse response) throws NullPointerException {
-		Objects.requireNonNull(response);
+		Objects.requireNonNull(response, "A resposta da API do Imdb não pode ser nula.");
 
-		List<String> titles = response.getMoviesTitles();
-		List<String> urlImages = response.getMoviesUrlImages();
-		List<String> years = response.getMoviesYears();
-		List<String> ratings = response.getMoviesRatings();
+		if (response.getErrorMessage().isEmpty()) {
+			List<String> titles = response.getMoviesTitles();
+			List<String> urlImages = response.getMoviesUrlImages();
+			List<String> years = response.getMoviesYears();
+			List<String> ratings = response.getMoviesRatings();
 
-		titles.forEach(System.out::println);
-		urlImages.forEach(System.out::println);
-		years.forEach(System.out::println);
-		ratings.forEach(System.out::println);
+			titles.forEach(System.out::println);
+			urlImages.forEach(System.out::println);
+			years.forEach(System.out::println);
+			ratings.forEach(System.out::println);
+		} else {
+			System.out.println(response.getErrorMessage());
+		}
 	}
 
 	/**
@@ -73,8 +77,13 @@ public class ImdbApiRequest {
 
 		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-		ImdbApiResponse imdbApiResponse = new Gson().fromJson(response.body(), ImdbApiResponse.class);
-		imdbApiResponse.setStatusCode(response.statusCode());
+		ImdbApiResponse imdbApiResponse;
+		if (response.statusCode() == 200) {
+			imdbApiResponse = new Gson().fromJson(response.body(), ImdbApiResponse.class);
+			imdbApiResponse.setStatusCode(response.statusCode());
+		} else {
+			imdbApiResponse = new ImdbApiResponse(response.statusCode());
+		}
 
 		return imdbApiResponse;
 	}

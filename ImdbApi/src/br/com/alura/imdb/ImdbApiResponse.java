@@ -5,6 +5,17 @@ import java.util.List;
 
 public class ImdbApiResponse {
 
+	// Construtores
+
+	public ImdbApiResponse() {
+		super();
+	}
+
+	public ImdbApiResponse(int statusCode) {
+		setStatusCode(statusCode);
+		setErrorMessage("Error " + statusCode);
+	}
+
 	// Atributos de instância
 
 	private List<ImdbItem> items = new ArrayList<ImdbItem>();
@@ -22,7 +33,7 @@ public class ImdbApiResponse {
 	}
 
 	public String getErrorMessage() {
-		return errorMessage == null ? "" : errorMessage;
+		return errorMessage == null ? "" : errorMessage.trim();
 	}
 
 	public void setErrorMessage(String errorMessage) {
