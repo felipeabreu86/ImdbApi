@@ -46,7 +46,9 @@ public class ImdbApiRequest {
 	private static void showResult(ImdbApiResponse response) throws NullPointerException {
 		Objects.requireNonNull(response, "A resposta da API do Imdb não pode ser nula.");
 
-		if (response.getErrorMessage().isEmpty()) {
+		if (response.hasError()) {
+			System.out.println(response.getErrorMessage());
+		} else {
 			List<String> titles = response.getMoviesTitles();
 			List<String> urlImages = response.getMoviesUrlImages();
 			List<String> years = response.getMoviesYears();
@@ -56,8 +58,6 @@ public class ImdbApiRequest {
 			urlImages.forEach(System.out::println);
 			years.forEach(System.out::println);
 			ratings.forEach(System.out::println);
-		} else {
-			System.out.println(response.getErrorMessage());
 		}
 	}
 

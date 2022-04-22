@@ -33,7 +33,7 @@ public class ImdbApiResponse {
 	}
 
 	public String getErrorMessage() {
-		return errorMessage == null ? "" : errorMessage.trim();
+		return errorMessage == null ? new String() : errorMessage.trim();
 	}
 
 	public void setErrorMessage(String errorMessage) {
@@ -49,6 +49,15 @@ public class ImdbApiResponse {
 	}
 
 	// Métodos
+
+	/**
+	 * Indica se houve um erro ao se realizar uma requisição à API do IMDB.
+	 * 
+	 * @return true em caso de erro e false em caso de resposta válida.
+	 */
+	public boolean hasError() {
+		return !getErrorMessage().isEmpty();
+	}
 
 	/**
 	 * Retorna uma lista contendo os títulos dos filmes.
