@@ -6,6 +6,10 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Objects;
+
+import com.google.gson.Gson;
 
 /**
  * Classe que trata da requisição à API da IMDB
@@ -25,10 +29,32 @@ public class ImdbApiRequest {
 	 */
 	public static void main(String[] args) {
 		try {
-			ApiRequest();
-		} catch (URISyntaxException | IOException | InterruptedException ex) {
+			ImdbApiResponse response = apiRequest();
+			showResult(response);
+		} catch (URISyntaxException | IOException | InterruptedException | NullPointerException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	/**
+	 * Exibe no console o resultado da consulta à API, mostrando os títulos, URLs
+	 * das imagens, ano dos filmes e notas.
+	 * 
+	 * @param response
+	 * @throws NullPointerException
+	 */
+	private static void showResult(ImdbApiResponse response) throws NullPointerException {
+		Objects.requireNonNull(response);
+
+		List<String> titles = response.getMoviesTitles();
+		List<String> urlImages = response.getMoviesUrlImages();
+		List<String> years = response.getMoviesYears();
+		List<String> ratings = response.getMoviesRatings();
+
+		titles.forEach(System.out::println);
+		urlImages.forEach(System.out::println);
+		years.forEach(System.out::println);
+		ratings.forEach(System.out::println);
 	}
 
 	/**
@@ -39,7 +65,7 @@ public class ImdbApiRequest {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	private static void ApiRequest() throws URISyntaxException, IOException, InterruptedException {
+	private static ImdbApiResponse apiRequest() throws URISyntaxException, IOException, InterruptedException {
 		HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
 
 		HttpRequest request = HttpRequest.newBuilder()
@@ -47,7 +73,9 @@ public class ImdbApiRequest {
 
 		HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-		System.out.println(response.statusCode());
-		System.out.println(response.body());
+		ImdbApiResponse imdbApiResponse = new Gson().fromJson(response.body(), ImdbApiResponse.class);
+		imdbApiResponse.setStatusCode(response.statusCode());
+
+		return imdbApiResponse;
 	}
 }
