@@ -7,11 +7,7 @@ import br.com.alura.imdb.utils.StringUtils;
  * 
  * @author Felipe Abreu
  */
-<<<<<<< HEAD
 public class Movie implements Comparable<Movie> {
-=======
-public class Movie {
->>>>>>> a8448a8d5c97024b111ceb2b92765bc0692119f7
 
 	// Atributos de instância
 
@@ -101,7 +97,6 @@ public class Movie {
 	public String toString() {
 		return String.format("Movie: %s (%s) - Rating: %s", this.title, this.year, this.imDbRating);
 	}
-<<<<<<< HEAD
 
 	/**
 	 * Sobrescrita do método compareTo da interface Comparable para definir que o
@@ -111,6 +106,4 @@ public class Movie {
 	public int compareTo(Movie anotherMovie) {
 		return anotherMovie.getImDbRating().compareTo(this.getImDbRating());
 	}
-=======
->>>>>>> a8448a8d5c97024b111ceb2b92765bc0692119f7
 }

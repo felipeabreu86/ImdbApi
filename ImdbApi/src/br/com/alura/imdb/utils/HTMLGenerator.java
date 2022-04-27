@@ -1,10 +1,7 @@
 package br.com.alura.imdb.utils;
 
 import java.io.PrintWriter;
-<<<<<<< HEAD
 import java.util.Collections;
-=======
->>>>>>> a8448a8d5c97024b111ceb2b92765bc0692119f7
 import java.util.List;
 import java.util.Objects;
 
@@ -43,11 +40,8 @@ public class HTMLGenerator {
 	public void generate(List<Movie> filmes) {
 		Objects.requireNonNull(filmes);
 
-<<<<<<< HEAD
 		ordenarFilmes(filmes);
 
-=======
->>>>>>> a8448a8d5c97024b111ceb2b92765bc0692119f7
 		writer.println("<!DOCTYPE html>");
 		writer.println("<html>");
 		writer.println("<head>");
@@ -77,8 +71,7 @@ public class HTMLGenerator {
 
 		System.out.println("Arquivo HTML gerado com sucesso!");
 	}
-<<<<<<< HEAD
-
+	
 	/**
 	 * Ordena a lista de filmes. Para estudo, implementei duas formas de comparação,
 	 * por meio da interface Comparator e da interface Comparable.
@@ -93,6 +86,4 @@ public class HTMLGenerator {
 		// implementar a interface Comparable.
 		Collections.sort(filmes);
 	}
-=======
->>>>>>> a8448a8d5c97024b111ceb2b92765bc0692119f7
 }
