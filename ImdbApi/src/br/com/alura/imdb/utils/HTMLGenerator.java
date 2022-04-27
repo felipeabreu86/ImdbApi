@@ -60,18 +60,15 @@ public class HTMLGenerator {
 				</div>
 				""";
 
-		for (int iterator = 0; iterator < filmes.size(); iterator++) {
-			Movie movie = filmes.get(iterator);
-			writer.println(String.format(divTemplate, movie.getTitle(), movie.getImage(), movie.getTitle(),
-					movie.getImDbRating(), movie.getYear()));
-		}
+		filmes.forEach((movie) -> writer.println(String.format(divTemplate, movie.getTitle(), movie.getImage(),
+				movie.getTitle(), movie.getImDbRating(), movie.getYear())));
 
 		writer.println("</body>");
 		writer.println("</html>");
 
 		System.out.println("Arquivo HTML gerado com sucesso!");
 	}
-	
+
 	/**
 	 * Ordena a lista de filmes. Para estudo, implementei duas formas de comparação,
 	 * por meio da interface Comparator e da interface Comparable.
