@@ -3,6 +3,7 @@ package br.com.alura.imdb.utils;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 import br.com.alura.imdb.models.Movie;
@@ -60,13 +61,20 @@ public class HTMLGenerator {
 				</div>
 				""";
 
+		// Imprime a lista de filmes invocando o método toString() da classe Movie
+		ListIterator<Movie> movies = filmes.listIterator();
+		while (movies.hasNext()) {
+			System.out.println(movies.next());
+		}
+
+		// Formata cada filme dentro do divTemplate e escreve no arquivo
 		filmes.forEach((movie) -> writer.println(String.format(divTemplate, movie.getTitle(), movie.getImage(),
 				movie.getTitle(), movie.getImDbRating(), movie.getYear())));
 
 		writer.println("</body>");
 		writer.println("</html>");
 
-		System.out.println("Arquivo HTML gerado com sucesso!");
+		System.out.println(System.lineSeparator() + "Arquivo HTML gerado com sucesso!");
 	}
 
 	/**
